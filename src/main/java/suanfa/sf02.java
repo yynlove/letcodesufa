@@ -1,6 +1,7 @@
 package suanfa;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class sf02 {
 
@@ -33,7 +34,7 @@ public class sf02 {
 
 
         final ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3, null)));
-        final ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(4, null)));
+        final ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(9, null)));
 
         final ListNode listNode = new sf02().addTwoNumbers(l1, l2);
 
@@ -42,8 +43,8 @@ public class sf02 {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-         ListNode listNode = new ListNode();
-         listNode = l1;
+        ListNode listNode;
+        listNode = l1;
         int i=0;
         int l1s =0;
         while (listNode!=null){
@@ -63,19 +64,22 @@ public class sf02 {
             if(i==0){
                 l2s = listNode.val;
             }else {
-                l2s = (int) (l1s + listNode.val*Math.pow(listNode.val,i));
+                l2s = (int) (l2s + listNode.val*Math.pow(10,i));
             }
             listNode=listNode.next;
             i++;
         }
         int sum = l1s + l2s;
+        List<ListNode> arrayList = new ArrayList<ListNode>();
+        while (sum >0){
+            arrayList.add(new ListNode(sum%10));
+            sum= sum/10;
+        }
+       for (int z=0;z<arrayList.size()-1;z++){
+           arrayList.get(z).next = arrayList.get(z+1);
+       }
 
-     //   while ()
-
-
-
-
-        return null;
+       return arrayList.get(0);
     }
 
 
@@ -90,6 +94,15 @@ public class sf02 {
           this.val = val;
           this.next = next;
       }
+
+        @Override
+        public String toString() {
+            return "ListNode{" +
+                    "val=" + val +
+                    ", next=" + next +
+                    '}';
+        }
     }
+
 
 }
