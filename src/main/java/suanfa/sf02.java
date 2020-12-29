@@ -32,9 +32,8 @@ public class sf02 {
      */
     public static void main(String[] args) {
 
-
-        final ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3, null)));
-        final ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(9, null)));
+        final ListNode l1 = new ListNode(2,new ListNode(4,new ListNode(3)));
+        final ListNode l2 = new ListNode(5,new ListNode(6,new ListNode(4)));
 
         final ListNode listNode = new sf02().addTwoNumbers(l1, l2);
 
@@ -43,43 +42,53 @@ public class sf02 {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-        ListNode listNode;
-        listNode = l1;
-        int i=0;
-        int l1s =0;
-        while (listNode!=null){
-            if(i==0){
-                l1s = listNode.val;
+
+        ListNode listNode=null;
+        ListNode returnList = null;
+
+        ListNode l1c= l1;
+        ListNode l2c = l2;
+
+        int jw=0;
+        while(l1c!=null || l2c !=null){
+
+            if(l1c!=null && l2c!=null){
+                final int i = l1c.val + l2c.val +jw;
+                jw = i / 10;
+                l1c= l1c.next;
+                l2c = l2c.next;
+                if(listNode == null){
+                    listNode = new ListNode(i%10);
+                    returnList= listNode;
+                }else{
+                    final ListNode listNode1 = new ListNode(i % 10);
+                    listNode.next = listNode1;
+                    listNode = listNode1;
+                }
+            }else if(l1c !=null){
+                final int i = l1c.val + jw;
+                jw = i/10;
+                l1c = l1c.next;
+
+                final ListNode listNode1 = new ListNode(i % 10);
+                listNode.next = listNode1;
+                listNode = listNode1;
+
             }else {
-                l1s = (int) (l1s+ listNode.val*Math.pow(10,i));
+                final int i = l2c.val + jw;
+                jw = i/10;
+                l2c = l2c.next;
+                final ListNode listNode1 = new ListNode(i % 10);
+                listNode.next = listNode1;
+                listNode = listNode1;
             }
-            listNode=listNode.next;
-            i++;
+        }
+        if(jw!=0){
+            final ListNode listNode1 = new ListNode(jw);
+            listNode.next = listNode1;
         }
 
-        i=0;
-        int l2s =0;
-        listNode = l2;
-        while (listNode!= null){
-            if(i==0){
-                l2s = listNode.val;
-            }else {
-                l2s = (int) (l2s + listNode.val*Math.pow(10,i));
-            }
-            listNode=listNode.next;
-            i++;
-        }
-        int sum = l1s + l2s;
-        List<ListNode> arrayList = new ArrayList<ListNode>();
-        while (sum >0){
-            arrayList.add(new ListNode(sum%10));
-            sum= sum/10;
-        }
-       for (int z=0;z<arrayList.size()-1;z++){
-           arrayList.get(z).next = arrayList.get(z+1);
-       }
-
-       return arrayList.get(0);
+       return returnList;
     }
 
 
