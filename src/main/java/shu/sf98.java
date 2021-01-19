@@ -27,7 +27,6 @@ public class sf98 {
         if (node == null) {
             return true;
         }
-        System.out.println(node+"   "+min +"  "+ max);
         if (node.val <= min || node.val >= max) {
             return false;
         }
@@ -38,8 +37,6 @@ public class sf98 {
      * 给定一个二叉树，判断其是否是一个有效的二叉搜索树
      *
      */
-
-
     public boolean isValidBST(TreeNode root) {
 
 
