@@ -16,7 +16,7 @@ public class sf106 {
         final sf106 sf106 = new sf106();
         final TreeNode treeNode = sf106.buildTree(inorder, postorder);
 
-
+        System.out.println(treeNode);
 
     }
 
