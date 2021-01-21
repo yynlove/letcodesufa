@@ -10,14 +10,12 @@ public class sf106 {
      */
     public static void main(String[] args) {
         //中序遍历
-        int[] inorder = {9,3,15,20,7};
+        int[] inorder = {4,2,5,1,6,3,7};
         //后序遍历
-        int[] postorder  = {9,15,7,20,3};
+        int[] postorder  = {4,5,2,6,7,3,1};
         final sf106 sf106 = new sf106();
         final TreeNode treeNode = sf106.buildTree(inorder, postorder);
-
         System.out.println(treeNode);
-
     }
 
 
@@ -42,8 +40,8 @@ public class sf106 {
         final Integer rootVal = integerIntegerHashMap.get(postorder[pe]);
         //中序左孩子数量
         final int number = rootVal - is;
-        treeNode.left = buildTree(inorder,postorder,integerIntegerHashMap,is,rootVal-1,ps,ps+number);
-        treeNode.right = buildTree(inorder,postorder,integerIntegerHashMap,rootVal+1,ie,rootVal,rootVal-1);
+        treeNode.left = buildTree(inorder,postorder,integerIntegerHashMap,is,rootVal-1,ps,ps+number-1);
+        treeNode.right = buildTree(inorder,postorder,integerIntegerHashMap,rootVal+1,ie,ps+number,pe-1);
         return treeNode;
     }
 
