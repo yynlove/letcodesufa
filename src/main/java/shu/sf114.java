@@ -1,6 +1,7 @@
 package shu;
 
 import com.sun.jmx.remote.internal.ArrayQueue;
+import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -16,14 +17,45 @@ public class sf114 {
 
 
         final sf114 sf114 = new sf114();
-       // final TreeNode treeNode = new TreeNode(1, new TreeNode(2, new TreeNode(3), new TreeNode(4)), new TreeNode(5, null, new TreeNode(6)));
+        final TreeNode treeNode = new TreeNode(1, new TreeNode(2, new TreeNode(3), new TreeNode(4)), new TreeNode(5, null, new TreeNode(6)));
 
-        sf114.flatten(null);
+        sf114.flattenDG(treeNode);
+        System.out.println(treeNode.toString());
 
 
     }
 
+    /**
+     * 递归
+     */
+    public void flattenDG(TreeNode root) {
+        if(root == null){
+            return;
+        }
+        //递归子树
+        final TreeNode left = root.left;
+        final TreeNode right = root.right;
+        flattenDG(left);
+        flattenDG(right);
+        //设置子树null
+        root.left = null;
+        root.right = left;
 
+        TreeNode cursor = root;
+        while(cursor.right != null){
+            cursor = cursor.right;
+        }
+        cursor.right = right;
+    }
+
+
+
+
+
+    /**
+     * 非递归
+     * @param root
+     */
     public void flatten(TreeNode root) {
 
         final Queue<Integer> integers = new LinkedList<>();
