@@ -1,5 +1,6 @@
 package shu;
 
+
 public class Node {
     public int val;
     public Node left;
@@ -29,3 +30,5 @@ public class Node {
                 '}';
     }
 }
+
+
