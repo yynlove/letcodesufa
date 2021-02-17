@@ -24,7 +24,7 @@ public class sf450 {
         TreeNode treeNode = new TreeNode(5, new TreeNode(3, null, new TreeNode(4)), new TreeNode(7, new TreeNode(6), new TreeNode(8)));
 
         sf450 sf450 = new sf450();
-        TreeNode treeNode1 = sf450.deleteNode(treeNode, 4);
+        TreeNode treeNode1 = sf450.deleteNode(treeNode, 5);
         System.out.println(treeNode1);
 
     }
@@ -58,16 +58,6 @@ public class sf450 {
             root.right = deleteNode(root.right, key);
         }
         return root;
-    }
-
-    private TreeNode getRightMin(TreeNode right,TreeNode root) {
-        TreeNode r = right;
-        while (r.left!=null){
-          r = r.left;
-        }
-        r.left = root.left;
-        r.right = root.right;
-        return r;
     }
 
 
