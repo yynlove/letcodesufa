@@ -1,13 +1,15 @@
 package shu;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class sf429 {
 
-
+    /**
+     *  给定一个 N 叉树，返回其节点值的层序遍历。（即从左到右，逐层遍历）。
+     *
+     * 树的序列化输入是用层序遍历，每组子节点都由 null 值分隔（参见示例）。
+     * @param args
+     */
     public static void main(String[] args) {
 
         final ArrayList<dNode> dNodes = new ArrayList<>();
@@ -29,9 +31,35 @@ public class sf429 {
 
 
     public List<List<Integer>> levelOrder(dNode root) {
-        
 
-        return null;
+        List<List<Integer>> lists = new ArrayList<>();
+        //判断是否null
+        if(root == null){
+            return lists;
+        }
+        //将每一层添加到队列中
+        Queue<dNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        ArrayList<Integer> integers = new ArrayList<>();
+        Queue<dNode> childrenQueue =new LinkedList<>();
+        while (!queue.isEmpty()){
+
+            dNode node = queue.poll();
+            if(node != null){
+                integers.add(node.val);
+            }
+            if(node.children != null && node.children.size() != 0){
+                childrenQueue.addAll(node.children);
+            }
+            if(queue.isEmpty()){
+                lists.add(integers);
+                queue = childrenQueue;
+                integers = new ArrayList<>();
+                childrenQueue =new LinkedList<>();
+            }
+        }
+        return lists;
     }
 
 
