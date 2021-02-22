@@ -17,12 +17,7 @@ public class sf637 {
 
     public List<Double> averageOfLevels(TreeNode root) {
 
-
             return null;
-
-
-
-
     }
 
 
