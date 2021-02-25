@@ -33,28 +33,46 @@ public class sf655 {
 
 
     /**
-     *
+     * 先把数组赋初值 然后遍历放入值
      * @param root
      * @return
      */
     public List<List<String>> printTree(TreeNode root) {
-
+        //求取最大深度
         final int n = dfs(root);
         int m = (int) (Math.pow(2,n)-1);
-        final List<List<String>> lists = new ArrayList<>();
-        final Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        int sn=0;
-        while (!queue.isEmpty()){
-            final int size = queue.size();
-            final ArrayList<String> strings = new ArrayList<>();
-            sn++;
+        final List<List<String>> lists = new ArrayList<>(n);
+        for (int i=0;i<n;i++){
+            final List<String> strings = new ArrayList<>(m);
             for (int j=0;j<m;j++){
                 strings.add("");
             }
-
+            lists.add(strings);
         }
+
+        int startIndex = 0;
+        dfsbianli(root,lists,startIndex,m-1,0);
+
         return  lists;
+    }
+
+    /**
+     * 遍历放入
+     * @param root
+     * @param lists
+     * @param startIndex
+     * @param endIndex
+     * @param dIndex
+     */
+    private void dfsbianli(TreeNode root, List<List<String>> lists, int startIndex, int endIndex,int dIndex) {
+        if(root == null || startIndex>endIndex){
+            return;
+        }
+        final int i = startIndex + (endIndex - startIndex) / 2;
+        lists.get(dIndex).set(i,String.valueOf(root.val));
+        dIndex++;
+        dfsbianli(root.left,lists,startIndex,i-1,dIndex);
+        dfsbianli(root.right,lists,i+1,endIndex,dIndex);
     }
 
     private int dfs(TreeNode root) {
